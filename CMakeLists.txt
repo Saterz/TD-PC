@@ -11,13 +11,26 @@ include(Fxconv)
 find_package(Gint 2.9 REQUIRED)
 
 set(SOURCES
+  src/main.c
   src/menu.c
-  src/menu.h
-  # ...
+  src/game.c
 )
 # Shared assets, fx-9860G-only assets and fx-CG-50-only assets
+# List image/sound files to be converted by fxconv. Metadata files
+# (fxconv-metadata.txt) in the same directories provide names and options.
 set(ASSETS
-  # ...
+  assets/sprites/environment/blank.bmp
+  assets/sprites/environment/grass.bmp
+  assets/sprites/environment/rock.bmp
+  assets/sprites/points/spawn.bmp
+  assets/sprites/points/goal.bmp
+  assets/sprites/turrets/turret_1.bmp
+  assets/sprites/roads/road_bl.bmp
+  assets/sprites/roads/road_br.bmp
+  assets/sprites/roads/road_tl.bmp
+  assets/sprites/roads/road_tr.bmp
+  assets/sprites/roads/road_h.bmp
+  assets/sprites/roads/road_v.bmp
 )
 set(ASSETS_fx
   # ...

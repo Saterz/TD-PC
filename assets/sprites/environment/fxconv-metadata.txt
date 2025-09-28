@@ -1,0 +1,11 @@
+grass.bmp:
+    type: bopti-image
+    name: spr_grass
+
+rock.bmp:
+    type: bopti-image
+    name: spr_rock
+
+blank.bmp:
+    type: bopti-image
+    name: spr_blank

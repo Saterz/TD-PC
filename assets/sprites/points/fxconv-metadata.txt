@@ -1,0 +1,7 @@
+spawn.bmp:
+    type: bopti-image
+    name: spr_spawn
+
+goal.bmp:
+    type: bopti-image
+    name: spr_goal

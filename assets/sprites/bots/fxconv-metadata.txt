@@ -1,0 +1,3 @@
+*.bmp:
+    type: bopti-image
+    name_regex: (.*)\.bmp$ \1

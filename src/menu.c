@@ -3,6 +3,16 @@
 #include <string.h>
 #include "menu.h"
 
+static MenuItem MENU_ITEMS[] = {
+    {"Plus"},
+    {"Jouer"},
+    {"Quitter"},
+};
+static const int MENU_COUNT = 3;
+
+// Draw one frame of the menu
+static void menu_draw(void);
+
 // Draw one frame of the menu
 static void menu_draw()
 {
@@ -109,22 +119,4 @@ int run_menu(void)
 			}
 		}
 	}
-}
-
-int main(void)
-{
-	int choice = run_menu();
-
-	dclear(C_WHITE);
-	if (choice < 0)
-	{
-		dtext(10, 28, C_BLACK, "Back...");
-	}
-	else
-	{
-		dprint(10, 28, C_BLACK, "Choice: %s", MENU_ITEMS[choice].label);
-	}
-	dupdate();
-	getkey();
-	return 1;
 }
