@@ -1,22 +1,30 @@
+/**
+ * @file menu.c
+ * @brief Main menu rendering and selection handling.
+ */
 #include <gint/display.h>
 #include <gint/keyboard.h>
 #include <string.h>
 #include "menu.h"
 
+/** Menu items displayed on the home screen. */
 static MenuItem MENU_ITEMS[] = {
     {"Plus"},
     {"Jouer"},
     {"Quitter"},
 };
+/** Number of menu items. */
 static const int MENU_COUNT = 3;
 
-// Draw one frame of the menu
+/**
+ * @brief Draw one frame of the menu (title, icons, labels).
+ */
 static void menu_draw(void);
 
 // Draw one frame of the menu
 static void menu_draw()
 {
-	dclear(C_NONE);
+	dclear(C_WHITE);
 
 	// Letter T
 	drect(42, 1, 44, 13, C_BLACK);
@@ -52,23 +60,23 @@ static void menu_draw()
 		// Draw circle
 		dcircle(cx, y_circle, radius, C_NONE, C_INVERT);
 
-		if (i == 1)
+		if (i == 0)
 		{
-			// Plus button
+			// Plus button (left)
 			dline(15, 24, 25, 24, C_BLACK);
 			dline(15, 29, 25, 29, C_BLACK);
 			dline(15, 34, 25, 34, C_BLACK);
 		}
-		else if (i == 2)
+		else if (i == 1)
 		{
-			// Play button
+			// Play button (middle)
 			dline(60, 24, 60, 33, C_BLACK);
 			dline(60, 34, 70, 29, C_BLACK);
 			dline(60, 24, 70, 29, C_BLACK);
 		}
 		else
 		{
-			// Quit button
+			// Quit button (right)
 			// Frame
 			dline(104, 22, 112, 22, C_BLACK);
 			dline(112, 22, 112, 34, C_BLACK);
@@ -92,7 +100,9 @@ static void menu_draw()
 	dupdate();
 }
 
-// Menu loop
+/**
+ * @brief Menu loop that waits for a selection key and returns the choice.
+ */
 int run_menu(void)
 {
 	menu_draw();

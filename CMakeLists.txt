@@ -14,6 +14,9 @@ set(SOURCES
   src/main.c
   src/menu.c
   src/game.c
+  src/turret.c
+  src/bot.c
+  src/map.c
 )
 # Shared assets, fx-9860G-only assets and fx-CG-50-only assets
 # List image/sound files to be converted by fxconv. Metadata files
@@ -25,6 +28,7 @@ set(ASSETS
   assets/sprites/points/spawn.bmp
   assets/sprites/points/goal.bmp
   assets/sprites/turrets/turret_1.bmp
+  assets/sprites/bots/bot_1.bmp
   assets/sprites/roads/road_bl.bmp
   assets/sprites/roads/road_br.bmp
   assets/sprites/roads/road_tl.bmp
