@@ -39,6 +39,8 @@ int game_loop(void)
 
         // Move bots one step along the path
         update_bots();
+        // Update turrets after bot movement to react this frame
+        update_all_turrets();
 
         if (ev.type == KEYEV_DOWN)
         {
@@ -61,10 +63,7 @@ int game_loop(void)
             {
                 int grid_x = selector_pixel_x / TILE_SIZE;
                 int grid_y = selector_pixel_y / TILE_SIZE;
-                if (can_build(grid_x, grid_y))
-                {
-                    towers[grid_y][grid_x] = 1;
-                }
+                build_turret(grid_x, grid_y);
             }
             break;
 
@@ -76,10 +75,8 @@ int game_loop(void)
             {
                 int grid_x = selector_pixel_x / TILE_SIZE;
                 int grid_y = selector_pixel_y / TILE_SIZE;
-                if (in_bounds(grid_x, grid_y) && towers[grid_y][grid_x])
-                {
-                    towers[grid_y][grid_x] = 0;
-                }
+                if (in_bounds(grid_x, grid_y))
+                    remove_turret(grid_x, grid_y);
             }
             break;
 
