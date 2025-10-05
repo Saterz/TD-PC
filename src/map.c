@@ -7,6 +7,7 @@
 #include "map.h"
 #include "game.h"
 #include "turret.h"
+#include "overlay.h"
 
 /**
  * @brief Read-only level tile grid.
@@ -14,15 +15,10 @@
  * Each entry is a Tile ID defined in map.h. This layout drives the
  * environment and the bot path.
  */
-const uint8_t level_tiles[MAP_H][MAP_W] = {
-    {2, 1, 1, 1, 1, 1, 0, 4, 0, 5, 4, 0, 5, 4},
-    {0, 5, 4, 0, 4, 1, 0, 0, 5, 0, 4, 0, 5, 0},
-    {0, 4, 0, 5, 0, 1, 0, 4, 0, 0, 5, 0, 4, 0},
-    {0, 4, 5, 0, 4, 1, 0, 0, 0, 5, 0, 4, 0, 0},
-    {4, 0, 0, 5, 0, 1, 1, 1, 1, 1, 1, 0, 5, 4},
-    {0, 0, 4, 0, 5, 0, 0, 4, 0, 0, 1, 0, 4, 5},
-    {4, 5, 0, 4, 0, 0, 5, 0, 0, 0, 1, 1, 1, 3},
-};
+/**
+ * @brief Mutable active level tile grid filled by the level selector.
+ */
+uint8_t level_tiles[MAP_H][MAP_W];
 
 /**
  * @brief Check if a tile connects to the road network.
@@ -124,7 +120,7 @@ static void draw_selector(int pixel_x, int pixel_y)
  * @param selector_pixel_x Selector X coordinate in pixels (top-left of tile).
  * @param selector_pixel_y Selector Y coordinate in pixels (top-left of tile).
  */
-void render_map(int selector_pixel_x, int selector_pixel_y)
+void render_map(int selector_pixel_x, int selector_pixel_y, int toggle_overlay)
 {
     dclear(C_WHITE);
 
@@ -153,6 +149,11 @@ void render_map(int selector_pixel_x, int selector_pixel_y)
     render_bots();
 
     draw_selector(selector_pixel_x, selector_pixel_y);
+
+    if (toggle_overlay)
+    {
+        overlay_draw();
+    }
 
     dupdate();
 }

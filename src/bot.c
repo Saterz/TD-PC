@@ -9,6 +9,7 @@
 #include <time.h>
 #include "game.h"
 #include "bot.h"
+#include "levels.h"
 
 extern bopti_image_t const spr_bot_1;
 
@@ -26,32 +27,6 @@ static const BotType BOT_BASIC = {
     .speed = 1,
     .sprite = &spr_bot_1,
 };
-
-/**
- * @brief Path waypoints (grid coordinates) matching the road, S -> G.
- */
-static const struct
-{
-    uint8_t grid_x, grid_y;
-} waypoints[] = {
-    {0, 0}, {1, 0}, {2, 0}, {3, 0}, {4, 0}, {5, 0}, // across the top row
-    {5, 1},
-    {5, 2},
-    {5, 3},
-    {5, 4}, // straight down
-    {6, 4},
-    {7, 4},
-    {8, 4},
-    {9, 4},
-    {10, 4}, // right turn
-    {10, 5}, // down one
-    {10, 6},
-    {11, 6},
-    {12, 6},
-    {13, 6} // final right to the Goal
-};
-/** Number of points in the path. */
-static const int WAYPOINT_COUNT = sizeof(waypoints) / sizeof(waypoints[0]);
 
 /**
  * @brief Convert a pixel coordinate to its tile index.
@@ -173,8 +148,8 @@ static void destroy_bot(Bot *b)
  */
 static inline void waypoint_index_to_pixel(int waypoint_index, int *out_pixel_x, int *out_pixel_y)
 {
-    int grid_x = waypoints[waypoint_index].grid_x;
-    int grid_y = waypoints[waypoint_index].grid_y;
+    int grid_x = waypoints[waypoint_index].x;
+    int grid_y = waypoints[waypoint_index].y;
     *out_pixel_x = grid_x * TILE_SIZE;
     *out_pixel_y = grid_y * TILE_SIZE;
 }

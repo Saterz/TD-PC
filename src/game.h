@@ -5,19 +5,7 @@
 #pragma once
 // Standard integer types
 #include <stdint.h>
-
-/** Logical screen width in pixels. */
-#define SCREEN_W 128
-/** Logical screen height in pixels. */
-#define SCREEN_H 64
-
-/** Size of a square map tile in pixels. */
-#define TILE_SIZE 9
-
-/** Map width in tiles (14 * 9 = 126 px). */
-#define MAP_W 14
-/** Map height in tiles (7 * 9 = 63 px). */
-#define MAP_H 7
+#include "map.h"
 
 /**
  * @brief Remaining player lives.
@@ -25,11 +13,6 @@
  * Decreases when a bot reaches the goal.
  */
 extern int LIFES;
-
-/**
- * @brief Read-only level layout, expressed as Tile IDs.
- */
-extern const uint8_t level_tiles[MAP_H][MAP_W];
 
 /**
  * @brief Check whether grid coordinates are inside the map bounds.

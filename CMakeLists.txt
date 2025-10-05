@@ -17,6 +17,8 @@ set(SOURCES
   src/turret.c
   src/bot.c
   src/map.c
+  src/overlay.c
+  src/levels.c
 )
 # Shared assets, fx-9860G-only assets and fx-CG-50-only assets
 # List image/sound files to be converted by fxconv. Metadata files

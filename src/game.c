@@ -12,6 +12,7 @@
 #include "bot.h"
 #include "turret.h"
 #include "map.h"
+#include "menu.h"
 
 /** Player starts with 10 lives. */
 int LIFES = 10;
@@ -20,8 +21,9 @@ int LIFES = 10;
  * @brief Main game loop.
  *
  * Processes input for selector movement and actions, updates bots, renders the
- * frame, and throttles timing. Returns when lives reach zero or the user exits.
- *
+ * frame, and throttles timing. Returns to the caller when the player loses all
+ * lives or presses the EXIT key.
+ * 
  * @return 0 when exiting the loop.
  */
 int game_loop(void)
@@ -31,6 +33,8 @@ int game_loop(void)
     // Selector position, clamped to map bounds
     int selector_pixel_x = 0;
     int selector_pixel_y = 0;
+
+    int toggle_overlay = 0;
 
     while (LIFES > 0)
     {
@@ -71,6 +75,10 @@ int game_loop(void)
                 spawn_bot();
                 break;
 
+            case KEY_OPTN:
+                toggle_overlay = !toggle_overlay;
+                break;
+
             case KEY_DEL:
             {
                 int grid_x = selector_pixel_x / TILE_SIZE;
@@ -81,6 +89,7 @@ int game_loop(void)
             break;
 
             case KEY_EXIT:
+                // Return immediately to leave the game and go back to the menu
                 return 0;
             }
         }
@@ -95,10 +104,11 @@ int game_loop(void)
         if (selector_pixel_y > MAP_H * TILE_SIZE - TILE_SIZE)
             selector_pixel_y = MAP_H * TILE_SIZE - TILE_SIZE;
 
-        render_map(selector_pixel_x, selector_pixel_y);
+        render_map(selector_pixel_x, selector_pixel_y, toggle_overlay);
 
         sleep_ms(16);
     }
 
+    // Lives reached zero: return to the caller (main will re-display the menu)
     return 0;
 }

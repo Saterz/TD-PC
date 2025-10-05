@@ -4,6 +4,7 @@
  */
 #pragma once
 #include <gint/display.h>
+#include "map.h"
 
 /**
  * @brief Static definition of a bot archetype (speed, HP, sprite).
@@ -15,7 +16,6 @@ typedef struct {
     const bopti_image_t *sprite;   /**< Sprite used to render the bot. */
 } BotType;
 
-// --- Bots following waypoints ---
 /**
  * @brief Runtime bot instance following a path of waypoints.
  */
@@ -29,6 +29,14 @@ typedef struct Bot
     int tile_x, tile_y;          /**< Cached tile coordinates. */
     struct Bot *next_in_tile;    /**< Next bot in the same tile bucket. */
 } Bot;
+
+/**
+ * @brief Path waypoints (grid coordinates) matching the road, Start -> Goal. This
+ * variable is defined in levels.c and updated by the level selector.
+ */ 
+extern const Point *waypoints;
+/** Number of points in the path. */
+extern int WAYPOINT_COUNT;
 
 /**
  * @brief Allocate a bot from the pool and place it at the spawn.

@@ -237,8 +237,8 @@ void update_turret(Tower *tower)
     int turret_tile_y = tower->y;
     int radius = tower->range_tiles;
     int x0 = clampi(turret_tile_x - radius, 0, MAP_W - 1);
-    int x1 = clampi(turret_tile_x + radius, 0, MAP_W - 1);
     int y0 = clampi(turret_tile_y - radius, 0, MAP_H - 1);
+    int x1 = clampi(turret_tile_x + radius, 0, MAP_W - 1);
     int y1 = clampi(turret_tile_y + radius, 0, MAP_H - 1);
 
     Bot *best_bot = NULL;

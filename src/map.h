@@ -21,8 +21,19 @@ extern bopti_image_t const spr_goal;  /**< Goal point sprite. */
 
 extern bopti_image_t const spr_turret_1; /**< Basic turret sprite. */
 
-// --- Tile IDs ---
-// Encoded values used in the static level grid
+/** Logical screen width in pixels. */
+#define SCREEN_W 128
+/** Logical screen height in pixels. */
+#define SCREEN_H 64
+
+/** Size of a square map tile in pixels. */
+#define TILE_SIZE 9
+
+/** Map width in tiles (14 * 9 = 126 px). */
+#define MAP_W 14
+/** Map height in tiles (7 * 9 = 63 px). */
+#define MAP_H 7
+
 /**
  * @brief Tile identifiers used in the level grid.
  */
@@ -37,8 +48,27 @@ typedef enum
 } Tile;
 
 /**
+ * @brief 2D grid coordinate used for waypoints on the map.
+ *
+ * Represents a tile position as unsigned bytes to match map dimensions.
+ */
+typedef struct
+{
+    uint8_t x; /**< Tile X coordinate (0..MAP_W-1). */
+    uint8_t y; /**< Tile Y coordinate (0..MAP_H-1). */
+} Point;
+
+
+/**
+ * @brief Read-only level layout, expressed as Tile IDs.
+ * 
+ * Active level tile grid; updated by the level selector.
+ */
+extern uint8_t level_tiles[MAP_H][MAP_W];
+
+/**
  * @brief Render the map, entities and selector.
  * @param selector_pixel_x Selector X coordinate in pixels.
  * @param selector_pixel_y Selector Y coordinate in pixels.
  */
-void render_map(int selector_pixel_x, int selector_pixel_y);
+void render_map(int selector_pixel_x, int selector_pixel_y, int toggle_overlay);
